@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import logo from "/assets/logo.svg"
-const Navbar = () => {
+import Hook from '../../../Hook/Hook';
 
+
+const Navbar = () => {
+const {LogOut,user} = Hook()
 const navitems =<>
 <li><Link to={'/'}>Home</Link></li>
 <li><Link to={'/about'}>About</Link></li>
@@ -16,7 +19,7 @@ const navitems =<>
         <div className="navbar bg-base-100 max-w-7xl mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+            <div tabIndex={0} role="button" className="btn btn-secondary lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -47,6 +50,32 @@ const navitems =<>
         </div>
         <div className="navbar-end">
           <button className='btn btn-outline btn-secondary'>Appoinment</button>
+          <div className='ml-2'>
+          {
+          user?<div className="dropdown dropdown-end">
+          <label tabIndex={0} className="btn btn-secondary btn-circle avatar">
+              <div className="w-10 rounded-full " title={user?.displayName || 'User name not found'}>
+                  <img className="" src={user?.photoURL? user.photoURL : "https://cdn-icons-png.flaticon.com/512/219/219986.png" } />
+              </div>
+          </label>
+          <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1000] p-2 shadow bg-base-100 rounded-box w-52">
+              <li>
+ <p className="btn btn-sm my-2 btn-secondary">{user?.displayName||'user name not found'}</p>
+
+              </li>
+              <li>
+                  <button
+                      onClick={LogOut}
+                      className="btn btn-sm  btn-secondary">Logout</button>
+
+              </li>
+          </ul>
+      </div>
+      :
+      <Link to={'/login'} className="btn btn-secondary  text-black  text-base lg:text-lg">Login</Link>
+        }
+
+          </div>
         </div>
       </div>
     );
