@@ -9,7 +9,7 @@ const auth = getAuth(app)
 //social media provider
 const googleProvider = new GoogleAuthProvider()
 const githubProvider = new GithubAuthProvider()
-const AuthProvider = ({Children}) => {
+const AuthProvider = ({children}) => {
 
 const [user,setUser] = useState(null)
 const [loading,setLoading] = useState(true)
@@ -63,7 +63,7 @@ const authInfo ={
 
     return (
         <AuthContext.Provider value={authInfo}>
-            {Children}
+            {children}
 
             </AuthContext.Provider>
     );

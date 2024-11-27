@@ -33,11 +33,15 @@ services.map(service=>(<div key={service._id} className="card bg-base-100 w-96 s
     <div className="card-body ">
       <h2 className="card-title">{service.title}</h2>
    <div className="flex justify-between">
-    <p className="lg:text-lg font-bold text-orange-400">Price : ${service.price}</p>
+    <p className="lg:text-lg font-bold text-orange-400 mt-2">Price : ${service.price}</p>
+<div className="flex space-x-5">
+    <Link to={`/details/${service._id}`}>
+    <button className="btn bg-orange-300">Details</button>
+    </Link>
 <Link to={`/checkout/${service._id}`}>
-<FaArrowRight className="text-orange-400"></FaArrowRight>
-
+<button className="flex btn bg-green-300">checkout </button>
 </Link>
+</div>
    </div>
 
     </div>

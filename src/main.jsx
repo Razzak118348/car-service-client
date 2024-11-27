@@ -10,8 +10,8 @@ import AuthProvider from './AuthProvider/AuthProvider.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AuthProvider Children={<RouterProvider router={Routes}></RouterProvider>}>
-
-    </AuthProvider>
-  </StrictMode>,
+  <AuthProvider>
+    <RouterProvider router={Routes} />
+  </AuthProvider>
+</StrictMode>
 )
