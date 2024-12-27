@@ -1,7 +1,7 @@
 import { useState } from "react";
 // import { Helmet } from "react-helmet";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { useForm } from "react-hook-form";
 import { toast, ToastContainer } from 'react-toastify';
@@ -13,7 +13,7 @@ import Hook from "../../Hook/Hook";
 const Signup = () => {
 
   const [passwordType, setPasswordType] = useState(false);
-  const {creatUser} = Hook()
+  const {createUser} = Hook()
 
   const {
     register,
@@ -21,7 +21,11 @@ const Signup = () => {
     formState: { errors },
   } = useForm()
 
-  const navigate = useNavigate()
+  // navigation
+  const navigation = useNavigate()
+  const location = useLocation();
+  const destination = location?.state ? location.state : "/";
+
 
   const PasswordValidation =(password) =>{
     const length = password.length>=6;
@@ -56,20 +60,17 @@ if(!PasswordValidation(password)){
 }
 
     //creat user
-    creatUser(email, password)
+    createUser(email, password)
       .then(() => {
-        updateUserProfile(name, image)
-          .then(() => {
             toast.success("Successfully Resister", {
               position: 'top-right',
-              onClose: navigate('/')
+              onClose: () => navigation(destination)
             })
-          })
-          .catch(error => {
-            toast.error(error.message, {
-              position: 'top-right',
-            })
-          })
+          // .catch(error => {
+          //   toast.error(error.message, {
+          //     position: 'top-right',
+          //   })
+          // })
       })
       .catch(error => {
         toast.error(error.message, {

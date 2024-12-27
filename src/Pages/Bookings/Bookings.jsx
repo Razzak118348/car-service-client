@@ -3,6 +3,8 @@ import Hook from "../../Hook/Hook";
 import Swal from "sweetalert2";
 import { MdTurnLeft } from "react-icons/md";
 import { Link } from "react-router-dom";
+import axios from 'axios';
+import { linkWithCredential } from "firebase/auth";
 
 const Bookings = () => {
   const { user, loading } = Hook();
@@ -11,16 +13,13 @@ const Bookings = () => {
   const url = `http://localhost:3000/bookings?email=${user?.email}`; // Fixed typo in `email`
 
   useEffect(() => {
-    if (user?.email) {
-      fetch(url)
-        .then((res) => res.json())
-        .then((data) => {
-          //   console.log(data);
-          setBookings(data);
-        })
-        .catch((err) => console.error("Error fetching bookings:", err));
-    }
-  }, [user?.email]);
+
+    axios.get(url,{withCredentials:true})
+    .then((res) => {
+      setBookings(res.data);
+      })
+      .catch((err) => console.error("Error fetching bookings:", err));
+  }, [url]);
 
   if (loading) {
     return (

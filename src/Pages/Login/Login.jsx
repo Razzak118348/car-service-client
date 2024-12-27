@@ -8,11 +8,12 @@ import "react-toastify/dist/ReactToastify.css";
 import { useForm } from "react-hook-form"
 import SocialLogin from "./SocialMediaLogin/SocialLogin";
 import Hook from "../../Hook/Hook";
+import axios from "axios";
 
 
 
 const Login = () => {
-  const {signIn} = Hook()
+  const { signIn } = Hook()
 
   const {
     register,
@@ -26,7 +27,7 @@ const Login = () => {
   // navigation
   const navigation = useNavigate()
   const location = useLocation();
-  const destination = location?.state?location.state : "/";
+  const destination = location?.state ? location.state : "/";
 
 
   //handle register with react hock form
@@ -36,17 +37,27 @@ const Login = () => {
     signIn(email, password)
       .then(result => {
         console.log(result.user)
+
+        // const user = { email }
+        // //get access token
+        // axios.post('http://localhost:3000/jwt', user,{withCredentials:true})
+        //   .then(res => {
+        //     console.log(res.data)
+        //   })
         if (result.user) {
           toast.success("Successfully Logged In", {
             position: 'top-right',
-            onClose: () => navigation(destination) })
+            //get access token
+            onClose: () => navigation(destination)
+          })
 
         }
       })
-      .catch(error => { console.log(error.message)
-toast.error("Password or Email Invalid",{position:'top-right'})
+      .catch(error => {
+        console.log(error.message)
+        toast.error("Password or Email Invalid", { position: 'top-right' })
 
-       })
+      })
   }
 
 
@@ -57,14 +68,14 @@ toast.error("Password or Email Invalid",{position:'top-right'})
       <ToastContainer autoClose={500}></ToastContainer>
 
       <div className="  p-3 rounded-2xl  grid grid-cols-1 md:grid-cols-2 gap-10 mt-10">
-      <div className="sm:hidden md:flex">
-<img src="/assets/images/login/login.svg" alt="" />
+        <div className="sm:hidden md:flex">
+          <img src="/assets/images/login/login.svg" alt="" />
         </div>
         <div className="popin-font   bg-[#FFFFFF] border border-green-300 text-center  rounded-xl">
           <h2 className="text-lg md:text-2xl font-bold text-[rgb(64,63,63)] mt-3">Please Login</h2>
 
           <hr className="my-3" />
-<SocialLogin></SocialLogin>
+          <SocialLogin></SocialLogin>
           <div className="">
             <div className="hero-content flex-col ">
               <div className="text-center lg:text-left">

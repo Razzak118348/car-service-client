@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 
 const Banner = () => {
@@ -11,8 +12,13 @@ const Banner = () => {
           <div className="text-white space-y-4 w-1/2 mb-8 mt-auto">
             <h2 className=" text-xl font-bold lg:text-5xl">Affordable Price For Car Servicing</h2>
             <p>There are many variations of passages of  available, but the majority have suffered alteration in some form</p>
-            <div className="space-y-4 md:space-x-4"><button className="btn btn-secondary "> Discover More</button>
-              <button className="btn btn-secondary btn-outline">Latest Project</button>
+            <div className="space-y-4 md:space-x-4">
+
+<Link to={'/Services'}><button className="btn btn-secondary "> Discover More</button></Link>
+             <Link to={'/blog'}>
+             <button className="btn btn-secondary btn-outline">Latest Project</button>
+             </Link>
+
             </div>
           </div>
           <div className="flex translate-y-1/2 transform bottom-0 space-x-3 mt-auto mb-10">
@@ -29,8 +35,11 @@ const Banner = () => {
           <div className="text-white space-y-4 w-1/2 mt-auto mb-5">
             <h2 className=" text-xl font-bold lg:text-5xl">Affordable Price For Car Servicing</h2>
             <p>There are many variations of passages of  available, but the majority have suffered alteration in some form</p>
-            <div className="space-y-4 md:space-x-4"><button className="btn btn-secondary "> Discover More</button>
+            <div className="space-y-4 md:space-x-4">
+
+              <button className="btn btn-secondary "> Discover More</button>
               <button className="btn btn-secondary btn-outline">Latest Project</button>
+
             </div>
           </div>
           <div className="flex translate-y-1/2 transform bottom-0 space-x-3 mt-auto mb-10">
