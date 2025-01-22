@@ -5,21 +5,32 @@ import { MdTurnLeft } from "react-icons/md";
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import { linkWithCredential } from "firebase/auth";
+import useAxiosSecure from "../../Hook/useAxiosSecure";
 
 const Bookings = () => {
   const { user, loading } = Hook();
   const [bookings, setBookings] = useState([]);
+const axiosSecure =useAxiosSecure();
 
-  const url = `http://localhost:3000/bookings?email=${user?.email}`; // Fixed typo in `email`
+  // const url = `http://localhost:3000/bookings?email=${user?.email}`; // Fixed type in `email`
+
+const url = `/bookings?email=${user?.email}`
 
   useEffect(() => {
 
-    axios.get(url,{withCredentials:true})
+    // axios.get(url,{withCredentials:true})
+    // .then((res) => {
+    //   setBookings(res.data);
+    //   })
+    //   .catch((err) => console.error("Error fetching bookings:", err));
+
+    axiosSecure.get(url)
     .then((res) => {
       setBookings(res.data);
       })
       .catch((err) => console.error("Error fetching bookings:", err));
-  }, [url]);
+
+  }, [url, axiosSecure]);
 
   if (loading) {
     return (

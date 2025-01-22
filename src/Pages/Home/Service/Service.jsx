@@ -1,16 +1,19 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
+import UseServices from "../../../Hook/UseServices";
 
 const Service = () => {
-const [services,setServices] = useState([])
+// const [services,setServices] = useState([])
 
-useEffect(()=>{
-    fetch('http://localhost:3000/services')
-    .then(res=>res.json())
-    .then(data=>setServices(data))
-},[])
+// useEffect(()=>{
+//     fetch('http://localhost:3000/services')
+//     .then(res=>res.json())
+//     .then(data=>setServices(data))
+// },[])
 
+//do not reapeat yourself => DRY
+const services = UseServices()
     return (
         <div className="my-20">
 <div className="flex justify-center items-center ">
