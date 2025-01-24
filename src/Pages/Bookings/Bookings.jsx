@@ -11,26 +11,27 @@ const Bookings = () => {
   const { user, loading } = Hook();
   const [bookings, setBookings] = useState([]);
 const axiosSecure =useAxiosSecure();
+// console.log(axiosSecure)
+  // const url = `https://car-service-server-theta.vercel.app/bookings?email=${user?.email}`; // Fixed type in `email`
 
-  // const url = `http://localhost:3000/bookings?email=${user?.email}`; // Fixed type in `email`
-
-const url = `/bookings?email=${user?.email}`
+  const url = `/bookings?email=${user?.email}`;
 
   useEffect(() => {
-
-    // axios.get(url,{withCredentials:true})
+     // axios.get(url,{withCredentials:true})
     // .then((res) => {
     //   setBookings(res.data);
     //   })
     //   .catch((err) => console.error("Error fetching bookings:", err));
 
-    axiosSecure.get(url)
-    .then((res) => {
-      setBookings(res.data);
-      })
-      .catch((err) => console.error("Error fetching bookings:", err));
+    if (user?.email) {
+      axiosSecure.get(url)
+        .then((res) => {
+          setBookings(res.data);
+        })
+        .catch((err) => console.error("Error fetching bookings:", err));
+    }
+  }, [user?.email, axiosSecure]);  // Only trigger when user email changes
 
-  }, [url, axiosSecure]);
 
   if (loading) {
     return (
@@ -53,7 +54,7 @@ const url = `/bookings?email=${user?.email}`
       confirmButtonText: "Yes, delete it!"
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/bookings/${id}`, {
+        fetch(`https://car-service-server-theta.vercel.app/bookings/${id}`, {
           method: "DELETE",
         })
           .then((res) => {
@@ -83,7 +84,7 @@ const url = `/bookings?email=${user?.email}`
 
 
   const handleBookingConform = (id) => {
-    fetch(`http://localhost:3000/bookings/${id}`, {
+    fetch(`https://car-service-server-theta.vercel.app/bookings/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

@@ -28,7 +28,7 @@ const Routes = createBrowserRouter([
             {
                 path:'/details/:id',
                 element:<ServiceDetails></ServiceDetails>,
-                loader:async({params})=>fetch(`http://localhost:3000/services/${params.id}`)
+                loader:async({params})=>fetch(`https://car-service-server-theta.vercel.app/services/${params.id}`)
             },
             {
                 path:'/login',
@@ -42,7 +42,7 @@ const Routes = createBrowserRouter([
             {
                 path:'checkout/:id',
                 element:<PrivateRout children={<CheckOut></CheckOut>}></PrivateRout>,
-                loader:({params})=> fetch(`http://localhost:3000/services/${params.id}`)
+                loader:({params})=> fetch(`https://car-service-server-theta.vercel.app/services/${params.id}`)
             },
             {
                 path:'/bookings',

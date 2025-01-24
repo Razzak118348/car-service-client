@@ -50,13 +50,13 @@ const AuthProvider = ({ children }) => {
 
             //if user exist then it should get a token
             if (currentUser) {
-                axios.post('http://localhost:3000/jwt', loggedUser, { withCredentials: true })
+                axios.post('https://car-service-server-theta.vercel.app/jwt', loggedUser, { withCredentials: true })
                     .then(res => {
                         console.log('token respons', res.data)
                     })
             }
             else {
-                axios.post('http://localhost:3000/logOut', loggedUser, { withCredentials: true })
+                axios.post('https://car-service-server-theta.vercel.app/logOut', loggedUser, { withCredentials: true })
                 .then(res => {
                     console.log('token respons', res.data)
                     })
