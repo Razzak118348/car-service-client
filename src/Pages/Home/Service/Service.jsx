@@ -1,23 +1,11 @@
-// import { useEffect, useState } from "react";
-
 import { Link } from "react-router-dom";
 import UseServices from "../../../Hook/UseServices";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const Service = () => {
-const [services,setServices] = useState([])
-
-useEffect(()=>{
-    fetch('https://car-service-server-theta.vercel.app/services')
-    .then(res=>res.json())
-    .then(data=>{
-        console.log(data)
-        setServices(data)
-    })
-},[])
-
+const [asc,setAsc]=useState(true);
 //do not reapeat yourself => DRY
-// const services = UseServices()
+const services = UseServices(asc)
     return (
         <div className="my-20">
 <div className="flex justify-center items-center ">
@@ -25,7 +13,13 @@ useEffect(()=>{
     <h3 className="text-xl text-orange-400 text-center">Service</h3>
     <h2 className="text-3xl font-bold text-center">Our service</h2>
     <p>The majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. </p>
+   <div className="text-center">
+     <button className="btn  btn-secondary " onClick={()=>setAsc(!asc)}>
+    {asc?'Price low to high':'Price high to low'}
+    </button>
+   </div>
 </div>
+
 </div>
 
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">

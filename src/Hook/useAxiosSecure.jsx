@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import Hook from "./Hook";
 import { useNavigate } from "react-router-dom";
 
-const axiosSecure = axios.create({
+export const axiosSecure = axios.create({
     baseURL: 'https://car-service-server-theta.vercel.app',
     withCredentials: true
 });

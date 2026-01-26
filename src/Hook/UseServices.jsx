@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react';
+import { axiosSecure } from './useAxiosSecure';
 
-const UseServices = () => {
+const UseServices = (asc) => {
     const [services, setServices] = useState([]);
 
     useEffect(() => {
-        fetch('https://car-service-server-theta.vercel.app/services')
-            .then(res => res.json())
-            .then(data => setServices(data))
+axiosSecure(`/services?sort=${asc ? 'asc' : 'dsc'}`)
+    .then(res => {
+        setServices(res.data);
+    })
+    .catch(err => console.log(err));
 
-    }, [])
+    }, [asc])
     return services;
 };
 

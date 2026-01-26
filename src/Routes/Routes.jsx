@@ -2,7 +2,7 @@
 import {
     createBrowserRouter,
 
-  } from "react-router-dom";
+} from "react-router-dom";
 import Root from "../Root/Root";
 import Home from "../Pages/Home/Home";
 import ServiceDetails from "../Pages/ServiceDetails/ServiceDetails";
@@ -19,50 +19,55 @@ import Contact from "../Pages/Contact/Contact";
 const Routes = createBrowserRouter([
     {
         path: "/",
-        element:<Root></Root>,
-        children:[
+        element: <Root></Root>,
+        children: [
             {
-                path:"/",
-                element:<Home></Home>
+                path: "/",
+                element: <Home></Home>
             },
             {
-                path:'/details/:id',
-                element:<ServiceDetails></ServiceDetails>,
-                loader:async({params})=>fetch(`https://car-service-server-theta.vercel.app/services/${params.id}`)
+                path: '/details/:id',
+                element: <ServiceDetails></ServiceDetails>,
+                loader: async ({ params }) => {
+                    const res = await fetch(`https://car-service-server-theta.vercel.app/services/${params.id}`);
+                    const data = await res.json();
+                    return data;
+                }
+
             },
             {
-                path:'/login',
-                element:<Login></Login>
+                path: '/login',
+                element: <Login></Login>
             },
             {
-                path:'/signup',
-                element:<Signup></Signup>
+                path: '/signup',
+                element: <Signup></Signup>
             },
 
             {
-                path:'checkout/:id',
-                element:<PrivateRout children={<CheckOut></CheckOut>}></PrivateRout>,
-                loader:({params})=> fetch(`https://car-service-server-theta.vercel.app/services/${params.id}`)
+                path: 'checkout/:id',
+                element: <PrivateRout children={<CheckOut></CheckOut>}></PrivateRout>,
+                loader: ({ params }) => fetch(`https://car-service-server-theta.vercel.app/services/${params.id}`)
             },
             {
-                path:'/bookings',
-                element:<PrivateRout children={<Bookings></Bookings>}></PrivateRout>
+                path: '/bookings',
+                element: <PrivateRout children={<Bookings></Bookings>}></PrivateRout>
             },
             {
-                path:'/about',
-                element:<About></About>
+                path: '/about',
+                element: <About></About>
             },
             {
-                path:'/Services',
-                element:<Service></Service>
+                path: '/Services',
+                element: <Service></Service>
             },
             {
-                path:'/blog',
-                element:<Blog></Blog>
+                path: '/blog',
+                element: <Blog></Blog>
             },
             {
-                path:'/contact',
-                element:<Contact></Contact>
+                path: '/contact',
+                element: <Contact></Contact>
             }
         ]
     }
